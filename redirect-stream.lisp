@@ -15,7 +15,10 @@
    #:make-redirect-stream))
 (in-package #:org.shirakumo.redirect-stream)
 
-(defclass redirect-stream (fundamental-stream)
+(defclass redirect-stream (fundamental-character-output-stream
+                           fundamental-character-input-stream
+                           fundamental-binary-output-stream
+                           fundamental-binary-input-stream)
   ((stream :initarg :stream :accessor stream))
   (:default-initargs
    :stream NIL))
