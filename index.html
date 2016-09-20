@@ -1,142 +1,92 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta charset="utf-8"/>
-    <title>REDIRECT-STREAM</title>
-    <style type="text/css">
-      html{font-family: serif;}
-      code a{text-decoration: none;}
-      h1{display: inline-block; margin-bottom: 0;}
-      code{font-family: monospace;}
-      h4{display: inline-block; margin: 0; padding: 0;}
-      #symbol-index ul{list-style: none;}
-      .package li{margin-bottom: 20px;}
-      .package pre{margin: 0 0 0 10px; white-space: pre-wrap;}
-      .package .nicknames{font-weight: normal;}
-      table{margin: 20px;}
-      td{padding-bottom: 10px;}
-    </style>
-  </head>
-  <body>
-    <header>
-      <h1>redirect-stream</h1>
-      <span>1.0.0</span>
-      <p>Offers a stream that redirects all actions to an inner stream.</p>
-    </header>
-    <div id="content">
-      <article>
-        <c:documentate>
-          <span><h2>About Redirect-Stream</h2>
+<!DOCTYPE html> <html xmlns="http://www.w3.org/1999/xhtml"> <head> <meta charset="utf-8"/> <title>Redirect-Stream</title> <meta name="viewport" content="width=device-width"/> <meta name="description" content="Offers a stream that redirects all actions to an inner stream."/> <meta name="author" content="Nicolas Hafner &lt;shinmera@tymoon.eu&gt;"/> <style type="text/css"> body{
+          max-width: 1024px;
+          margin: 0 auto 0 auto;
+          font-family: sans-serif;
+          color: #333333;
+          font-size: 14pt;
+          padding: 5px;
+      }
 
-<p>This is a very simple implementation of a gray stream that redirects all stream operations it receives to another stream. This is useful in situations where you would like to change the target of operations at any point in time without being able to change the actual binding of the stream that is being operated on.</p>
+      body>header{
+          display:flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+          max-width: 100%;
+      }
 
-<h2>How To</h2>
+      img{
+          max-width: 100%;
+          max-height: 100%;
+      }
 
-<p>Load it with Quicklisp or ASDF</p>
+      code{
+          font-family: Consolas, Inconsolata, monospace;
+      }
 
-<pre><code>(ql:quickload :redirect-stream)
-</code></pre>
+      a{
+          text-decoration: none;
+          color: #0055AA;
+      }
 
-<p>Let's create a redirect stream.</p>
+      #documentation{
+          text-align: justify;
+      }
 
-<pre><code>(<a href="http://l1sp.org/cl/defvar">defvar</a> *stream* (<a href="#REDIRECT-STREAM:MAKE-REDIRECT-STREAM">redirect-stream:make-redirect-stream</a>))
-</code></pre>
+      #documentation pre{
+          margin-left: 20px;
+      }
 
-<p>At this point there's no stream inside the redirect-stream, so doing anything won't result in anything useful.</p>
+      #symbol-index>ul{
+          list-style: none;
+          padding: 0;
+      }
+      #symbol-index .package>ul{
+          list-style: none;
+          padding: 0 0 0 10px;
+      }
+      #symbol-index .package .nicknames{
+          font-weight: normal;
+      }
+      #symbol-index .package h4{
+          display: inline-block;
+          margin: 0;
+      }
+      #symbol-index .package article{
+          margin: 0 0 15px 0;
+      }
+      #symbol-index .package article header{
+          font-size: 1.2em;
+          font-weight: normal;
+      }
+      #symbol-index .package .name{
+          margin-right: 5px;
+      }
+      #symbol-index .package .docstring{
+          margin: 0 0 0 15px;
+          white-space: pre-wrap;
+          font-size: 12pt;
+      }
 
-<pre><code>(<a href="http://l1sp.org/cl/print">print</a> 0 *stream*)
-</code></pre>
-
-<p>So let's change that.</p>
-
-<pre><code>(<a href="http://l1sp.org/cl/setf">setf</a> (<a href="#REDIRECT-STREAM:STREAM">redirect-stream:stream</a> *stream*) *standard-output*)
+      @media (max-width: 800px){
+          body{font-size: 12pt;}
+      } </style> </head> <body> <header> <h1>redirect-stream</h1> <span class="version">1.0.0</span> <p class="description">Offers a stream that redirects all actions to an inner stream.</p> </header> <main> <article id="documentation">  <div><h2>About Redirect-Stream</h2> <p>This is a very simple implementation of a gray stream that redirects all stream operations it receives to another stream. This is useful in situations where you would like to change the target of operations at any point in time without being able to change the actual binding of the stream that is being operated on.</p> <h2>How To</h2> <p>Load it with Quicklisp or ASDF</p> <pre><code>(ql:quickload :redirect-stream)
+</code></pre> <p>Let's create a redirect stream.</p> <pre><code>(<a href="http://l1sp.org/cl/defvar">defvar</a> *stream* (<a href="#REDIRECT-STREAM:MAKE-REDIRECT-STREAM">redirect-stream:make-redirect-stream</a>))
+</code></pre> <p>At this point there's no stream inside the redirect-stream, so doing anything won't result in anything useful.</p> <pre><code>(<a href="http://l1sp.org/cl/print">print</a> 0 *stream*)
+</code></pre> <p>So let's change that.</p> <pre><code>(<a href="http://l1sp.org/cl/setf">setf</a> (<a href="#REDIRECT-STREAM:STREAM">redirect-stream:stream</a> *stream*) *standard-output*)
 (<a href="http://l1sp.org/cl/print">print</a> 0 *stream*)
-</code></pre>
-
-<p>We can also use it for input.</p>
-
-<pre><code>(<a href="http://l1sp.org/cl/setf">setf</a> (<a href="#REDIRECT-STREAM:STREAM">redirect-stream:stream</a> *stream*) *standard-input*)
+</code></pre> <p>We can also use it for input.</p> <pre><code>(<a href="http://l1sp.org/cl/setf">setf</a> (<a href="#REDIRECT-STREAM:STREAM">redirect-stream:stream</a> *stream*) *standard-input*)
 (<a href="http://l1sp.org/cl/read-line">read-line</a> *stream*)
-</code></pre>
-
-<p>And that's pretty much it, really. It just redirects everything, just as one might guess.</p>
-</span>
-        </c:documentate>
-      </article>
-      <article>
-        
-          <h2>Copyright</h2>
-          <span>redirect-stream</span> is licensed under the <span><a href="https://tldrlegal.com/search?q=Artistic">Artistic</a></span> license.
-          
-            © <span>Nicolas Hafner &lt;shinmera@tymoon.eu&gt;</span>
-            .
-          
-          This library can be obtained on <a href="https://github.com/Shinmera/redirect-stream">https://github.com/Shinmera/redirect-stream</a>.
-        
-      </article>
-      
-        <article id="symbol-index">
-          <h2>Package Index</h2>
-          <ul><li class="package">
-              <h3>
-                <a name="REDIRECT-STREAM" href="#REDIRECT-STREAM">REDIRECT-STREAM</a>
-                <span class="nicknames">(ORG.SHIRAKUMO.REDIRECT-STREAM)</span>
-              </h3>
-              <ul><li>
-                  <a name="REDIRECT-STREAM:REDIRECT-STREAM"/>
-                  <article>
-                    <header class="class">
-                      <span class="type">class</span>
-                      <code>
-                        <h4><a href="#REDIRECT-STREAM:REDIRECT-STREAM" class="name">REDIRECT-STREAM</a></h4>
-                        <span class="qualifiers"></span>
-                        <span class="arguments">()</span>
-                      </code>
-                    </header>
-                    <pre class="docstring">A gray-stream class that redirects all stream operations to its STREAM object.
+</code></pre> <p>And that's pretty much it, really. It just redirects everything, just as one might guess.</p> </div>  </article> <article id="copyright">  <h2>Copyright</h2> <span>redirect-stream</span> is licensed under the <span><a href="https://tldrlegal.com/search?q=Artistic">Artistic</a></span> license.  © <span>Nicolas Hafner &lt;shinmera@tymoon.eu&gt;</span> .  This library can be obtained on <a href="https://github.com/Shinmera/redirect-stream">https://github.com/Shinmera/redirect-stream</a>.  </article>  <article id="symbol-index"> <h2>Package Index</h2> <ul><li class="package"> <h3> <a name="REDIRECT-STREAM" href="#REDIRECT-STREAM">REDIRECT-STREAM</a> <span class="nicknames">(ORG.SHIRAKUMO.REDIRECT-STREAM)</span> </h3> <ul><li> <a name="REDIRECT-STREAM:REDIRECT-STREAM"> </a> <article> <header class="class"> <span class="type">class</span>  <h4 class="name"><code><a href="#REDIRECT-STREAM:REDIRECT-STREAM">REDIRECT-STREAM</a></code></h4>  </header> <pre class="docstring">A gray-stream class that redirects all stream operations to its STREAM object.
 
 If STREAM is NIL, a stream operation will do nothing and return NIL. Otherwise
 the exact same operation with the exact same parameters is performed on STREAM.
 
-See STREAM</pre>
-                  </article>
-                </li><li>
-                  <a name="REDIRECT-STREAM:STREAM"/>
-                  <article>
-                    <header class="accessor">
-                      <span class="type">accessor</span>
-                      <code>
-                        <h4><a href="#REDIRECT-STREAM:STREAM" class="name">STREAM</a></h4>
-                        <span class="qualifiers"></span>
-                        <span class="arguments">(OBJECT)</span>
-                      </code>
-                    </header>
-                    <pre class="docstring">Returns the stream the REDIRECT-STREAM redirects to.
+See STREAM</pre> </article> </li><li> <a name="REDIRECT-STREAM:STREAM"> </a> <article> <header class="accessor"> <span class="type">accessor</span>  <code>(</code><h4 class="name"><code><a href="#REDIRECT-STREAM:STREAM">STREAM</a></code></h4> <code class="qualifiers"></code> <code class="arguments">OBJECT</code><code>)</code>  </header> <pre class="docstring">Returns the stream the REDIRECT-STREAM redirects to.
 
 SETF-able.
 
-See REDIRECT-STREAM</pre>
-                  </article>
-                </li><li>
-                  <a name="REDIRECT-STREAM:MAKE-REDIRECT-STREAM"/>
-                  <article>
-                    <header class="function">
-                      <span class="type">function</span>
-                      <code>
-                        <h4><a href="#REDIRECT-STREAM:MAKE-REDIRECT-STREAM" class="name">MAKE-REDIRECT-STREAM</a></h4>
-                        <span class="qualifiers"></span>
-                        <span class="arguments">(&amp;OPTIONAL STREAM)</span>
-                      </code>
-                    </header>
-                    <pre class="docstring">Creates a new REDIRECT-STREAM that directs all operations to STREAM.
+See REDIRECT-STREAM</pre> </article> </li><li> <a name="REDIRECT-STREAM:MAKE-REDIRECT-STREAM"> </a> <article> <header class="function"> <span class="type">function</span>  <code>(</code><h4 class="name"><code><a href="#REDIRECT-STREAM:MAKE-REDIRECT-STREAM">MAKE-REDIRECT-STREAM</a></code></h4> <code class="qualifiers"></code> <code class="arguments">&amp;OPTIONAL STREAM</code><code>)</code>  </header> <pre class="docstring">Creates a new REDIRECT-STREAM that directs all operations to STREAM.
 
 See STREAM
-See REDIRECT-STREAM</pre>
-                  </article>
-                </li></ul>
-            </li></ul>
-        </article>
-      
-    </div>
-  </body>
-</html>
+See REDIRECT-STREAM</pre> </article> </li></ul> </li></ul> </article>  </main> </body> </html> 
