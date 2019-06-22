@@ -6,7 +6,7 @@
 
 (asdf:defsystem redirect-stream
   :version "1.0.0"
-  :license "Artistic"
+  :license "zlib"
   :author "Nicolas Hafner <shinmera@tymoon.eu>"
   :maintainer "Nicolas Hafner <shinmera@tymoon.eu>"
   :description "Offers a stream that redirects all actions to an inner stream."
