@@ -1,9 +1,3 @@
-#|
- This file is a part of redirect-stream
- (c) 2015 Shirakumo http://tymoon.eu (shinmera@tymoon.eu)
- Author: Nicolas Hafner <shinmera@tymoon.eu>
-|#
-
 (in-package #:cl-user)
 (defpackage #:redirect-stream
   (:nicknames #:org.shirakumo.redirect-stream)
